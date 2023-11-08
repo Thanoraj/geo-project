@@ -5,12 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMC Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+
+    <script href="{{ url_for('static', filename='script/script.js') }}" defer></script>
 </head>
 
 <body>
-    <div>
-        Hello world!
-    </div>
+
+    <form action="/submit-form" method="post">
+        <div class="form-container">
+
+            <label for="field1">Field 1:</label>
+            <input type="text" id="field1" name="field1"><br><br>
+
+            <label for="field2">Field 2:</label>
+            <input type="text" id="field2" name="field2"><br><br>
+
+            <label for="field3">Field 3:</label>
+            <input type="text" id="field3" name="field3"><br><br>
+
+            <label for="field4">Field 4:</label>
+            <input type="text" id="field4" name="field4"><br><br>
+
+            <label for="field5">Field 5:</label>
+            <input type="text" id="field5" name="field5"><br><br>
+
+            <input type="submit" value="Submit">
+
+        </div>
+
+    </form>
 </body>
 
 </html>

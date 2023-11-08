@@ -1,0 +1,38 @@
+/* styles.css */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+  }
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  label, input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  input[type="text"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cacf2;
+    color: white;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    background-color: #4a94d4;
+  }
+  
