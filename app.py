@@ -110,7 +110,7 @@ def predictOMC1():
         data1 = request.get_json(force=True)
         print(data1)
         # predictionMDD = (data)
-        data = pd.read_excel("data/MDD.xlsx")
+        data = pd.read_excel("data/omc.xlsx")
 
         fasoil_value = float(data1['fasoil'])
         second_col_value = float(data1['pi'])
@@ -162,7 +162,7 @@ def predictUCS1():
         data1 = request.get_json(force=True)
         print(data1)
         # predictionMDD = predictUCS(data)
-        data = pd.read_excel("data/MDD.xlsx")
+        data = pd.read_excel("data/Model UCS.xlsx")
 
         fasoil_value = float(data1['fasoil'])
         second_col_value = float(data1['pi'])
