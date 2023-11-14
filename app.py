@@ -188,13 +188,12 @@ def predictUCS1():
         if matched != 4:
                 print(matched)
                 print(rows)
-                print(rows[rows.iloc[:, matched] < target].iloc[:, matched].max())
                 lower = rows[rows.iloc[:, matched] < target].iloc[:, matched].max()
                 higher = rows[rows.iloc[:, matched] > target].iloc[:, matched].min()
 
                 # Get the corresponding rows
-                lower_row = rows[np.round(rows.iloc[:, matched],3) == lower]
-                higher_row = rows[np.round(rows.iloc[:, matched],3) == higher]
+                lower_row = rows[rows.iloc[:, matched] == lower]
+                higher_row = rows[rows.iloc[:, matched] == higher]
                 print(higher_row.empty)
                 print(lower_row.empty)
                 if not lower_row.empty and not higher_row.empty:
