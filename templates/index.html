@@ -1,40 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMC Web</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-
-    <script href="{{ url_for('static', filename='script/script.js') }}" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University of Peradeniya - Civil Engineering Department</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
-
 <body>
+    <div class="container">
+        <div class="top-row">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="University Logo" class="logo">
+            <div class="title-container">
+              <h1 class="title">DEPARTMENT OF CIVIL ENGINEERING</h1>
+              <h2 class="title">UNIVERSITY OF PERADENIYA</h2>
+            </div>
+          </div>
+      <div class="content">
+        <div class="subtitle">
+            <h3 >PREDICTION OF GEOTECHNICAL PROPERTIES OF</h3> 
+            <h3 >EXPANSIVE SOIL STABILIZED WITH FLY ASH</h3>
+        </div>
 
-    <form action="/submit-form" method="post">
-        <div class="form-container">
-
-            <label for="field1">Field 1:</label>
-            <input type="text" id="field1" name="field1"><br><br>
-
-            <label for="field2">Field 2:</label>
-            <input type="text" id="field2" name="field2"><br><br>
-
-            <label for="field3">Field 3:</label>
-            <input type="text" id="field3" name="field3"><br><br>
-
-            <label for="field4">Field 4:</label>
-            <input type="text" id="field4" name="field4"><br><br>
-
-            <label for="field5">Field 5:</label>
-            <input type="text" id="field5" name="field5"><br><br>
-
-            <input type="submit" value="Submit">
+        <div class="button-div">
+            <button id="mdd" class="button">
+                <img  src="{{ url_for('static', filename='images/button.png') }}" alt="Button Image" class="button-img">
+                <span class="button-text">MAXIMUM DRY DENSITY</span>
+            </button>
+            <button id="omc" class="button">
+                <img  src="{{ url_for('static', filename='images/button.png') }}" alt="Button Image" class="button-img">
+                <span class="button-text">OPTIMIM MOISTURE CONTENT</span>
+            </button>
+            <button id="ucs" class="button">
+                <img  src="{{ url_for('static', filename='images/button.png') }}" alt="Button Image" class="button-img">
+                <span class="button-text">UNCONFINED COMPRESSIVE STRENTH 28 Days</span>
+            </button>
 
         </div>
 
-    </form>
-</body>
+        <div class="bottom-div project-info">
+            <div >
+                <p>Supervised by: </p>
+                <p>DR. M. C. M. NASVI</p>
+              </div>
+           
+            <p >PROJECT NO: C/17/42</p>
+            <div >
+              <p>E/17/167 KIRUSHANTHAN K.</p>
+              <p>E/17/348 THIGITHARAN T.</p>
+            </div>
+        </div>
+        
+        
+      </div>
+    </div>
 
+</body>
+<script>
+  document.getElementById("mdd").addEventListener("click", function (e){
+    let navLink = document.createElement('a');
+    navLink.setAttribute('href', 'http://127.0.0.1:5001/predictMDD');
+    console.log(navLink.src);
+    navLink.click();
+
+  })
+  document.getElementById("omc").addEventListener("click", function (e){
+    let navLink = document.createElement('a');
+    navLink.setAttribute('href', 'http://127.0.0.1:5001/predictOMC');
+    console.log(navLink.src);
+    navLink.click();
+
+  })
+  document.getElementById("ucs").addEventListener("click", function (e){
+    let navLink = document.createElement('a');
+    navLink.setAttribute('href', 'http://127.0.0.1:5001/predictUCS');
+    console.log(navLink.src);
+    navLink.click();
+
+  })
+</script>
 </html>

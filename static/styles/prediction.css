@@ -1,0 +1,152 @@
+body, html {
+    background: url('../images/bg1.png') no-repeat center center;
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.prediction-title {
+    width: 100%;
+    background-color: #fff;
+}
+
+.input-title {
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=number] {
+    margin: 5px 0;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.vertical-divider {
+    background-color: #fff;
+    width: 2px;
+    height: 300px;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+
+.main-menu-button {
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.main-menu-button:hover {
+    background-color: #A0522D;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.description {
+    padding: 10px;
+    font-size: 14px;
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+ul {
+    text-align: left;
+}
+
+.middle-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* This will align the tops of the elements */
+    padding: 20px;
+}
+
+.input-form, .output-container, .graph-container {
+    flex-basis: 30%; /* Adjust this percentage based on your needs */
+}
+
+/* Add this if you want the form elements to display in a block fashion */
+.input-form label, 
+.input-form input[type="text"], 
+.input-form input[type="submit"] {
+    display: block;
+    width: 100%;
+}
+
+
+
+/* Optional: Styles for the graph container if needed */
+.graph-container img {
+    width: 100%; /* This will make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 768px) {
+    /* For smaller screens, stack the elements instead of side by side */
+    .middle-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .input-form, .output-container, .graph-container {
+        flex-basis: auto;
+        width: 100%;
+    }
+}
+
+.form-row {
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.form-row label {
+    flex: 0 0 40%; /* Adjust the width of the label as needed */
+    text-align: left; /* Align the text of the label to the left */
+}
+
+.form-row input[type="text"] {
+    flex: 1; /* The input will fill up the rest of the row */
+}
+
+.bottom-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end; /* This will align the tops of the elements */
+    padding: 20px 0;
+}
+
+/* Add additional styling as needed */

@@ -1,1 +1,5 @@
-streamlit
+scikit-learn
+flask
+tensorflow
+openpyxl
+matplotlib

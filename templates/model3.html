@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction of Maximum Density</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/prediction.css') }}">
+    <!-- Add any additional CSS or JS files here -->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="prediction-title">
+                <h1>PREDICTION OF 28 DAY UNCONFINED COMPRESSIVE STRENGTH OF EXPANSIVE SOIL STABILIZED WITH CLASS F FLY ASH</h1>
+            </div>
+
+        </div>
+
+        <div class="middle-container">
+            <form class="input-form">
+                <div class="input-title">Enter the inputs</div>
+                <div class="form-row">
+                    <label for="clay">FA/SOIL:</label>
+                    <input type="number" id="clay" name="clay" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="pi">PI:</label>
+                    <input type="number" id="pi" name="pi" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="mddr">UCS<sub>28</sub>:</label>
+                    <input type="number" id="mddr" name="mddr" required>
+                </div>
+
+                <input type="submit" value="SUBMIT" id="submit-button">
+            </form>
+
+            <div class="vertical-divider">
+
+            </div>
+
+            <div class="output-container">
+                <div class="input-title">Predicted Output</div>
+
+
+                <div class="form-row">
+                    <label for="mddr">UCS (kPa):</label>
+                    <input   type="number" id="mdd" name="mdd" disabled>
+                </div>
+                <div>
+
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <img src="{{ url_for('static', filename='images/plot3.jpeg') }}" alt="Predicted vs Actual Values">
+            </div>
+        </div>
+
+
+
+        <div class="bottom-container">
+            <div class="description">
+                <p>Performance of the developed Model: R-Square: 0.983 | RMSE: 0.024</p>
+                <p>For best performance, input the following parameters within the specified ranges:</p>
+                <ul>
+                    <li>Soil Percentage: 20% to 100%</li>
+                    <li>Plasticity Index (PI) of raw soil 25% to 50%</li>
+                    <li>Fly Ash Percentage: 0% to 80%</li>
+                    <li>Calcium Oxide (CaO) Percentage: 0.5% to 24.1%</li>
+                    <li>UCS of raw soil (UCSn): 147.15 kPa to 799.8 kPa</li>
+                </ul>
+            </div>
+            <div></div>
+            <a href="http:127.0.0.1:5000/" class="main-menu-button">MAIN MENU</a>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+<script>
+
+    document.getElementById('submit-button').addEventListener("click", function (e) {
+        e.preventDefault();
+        let fasoil = document.getElementById("clay").value;
+        let pi = document.getElementById("pi").value;
+        let mddr = document.getElementById("mddr").value;
+        
+        const formDataJsonString = JSON.stringify({
+            fasoil:fasoil,
+            pi: pi,
+            mddr:mddr,
+        }); // Convert to a JSON string
+
+        fetch('/predictUCS', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: formDataJsonString
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("orange");
+
+            // Handle response data
+            console.log(data);
+            // For example, if your Flask app returns the predicted MDD, you could display it in the output field
+            document.getElementById('mdd').value = parseFloat(data.predicted).toFixed(3);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+        });
+
+        console.log("apple");
+    });
+</script>
+
+</html>
