@@ -186,23 +186,28 @@ def predictUCS1():
                     fourth_column_value = rows.iloc[0, 3]
                     matched = 4
         if matched != 4:
+                print(matched)
+                print(rows)
+                print(rows[rows.iloc[:, matched] < target].iloc[:, matched].max())
                 lower = rows[rows.iloc[:, matched] < target].iloc[:, matched].max()
                 higher = rows[rows.iloc[:, matched] > target].iloc[:, matched].min()
 
                 # Get the corresponding rows
                 lower_row = rows[np.round(rows.iloc[:, matched],3) == lower]
                 higher_row = rows[np.round(rows.iloc[:, matched],3) == higher]
-
+                print(higher_row.empty)
+                print(lower_row.empty)
                 if not lower_row.empty and not higher_row.empty:
                     lower_value = lower_row.iloc[0, 3]
                     higher_value = higher_row.iloc[0, 3]
                     proportion = (target - lower) / (higher - lower)
                     fourth_column_value = lower_value + proportion * (higher_value - lower_value)
-
-                elif lower_row.empty:
+                elif lower_row.empty and not higher_row.empty:
                     fourth_column_value = higher_row.iloc[0, 3]
-                elif higher_row.empty:
+                elif higher_row.empty and not lower_row.empty:
                     fourth_column_value = lower_row.iloc[0, 3]
+
+                
 
         return jsonify({"predicted": str(fourth_column_value)})
     else :

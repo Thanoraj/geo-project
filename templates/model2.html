@@ -14,7 +14,8 @@
     <div class="container">
         <div class="form-container">
             <div class="prediction-title">
-                <h1>PREDICTION OF MAXIMUM DENSITY OF EXPANSIVE SOIL STABILIZED WITH CLASS F FLY ASH</h1>
+                <h1>PREDICTION OF OPTIMUM MOISTURE CONTENT OF EXPANSIVE SOIL STABILIZED WITH CLASS F FLY ASH 
+                </h1>
             </div>
 
         </div>
@@ -101,7 +102,7 @@
             mddr:mddr,
         }); // Convert to a JSON string
 
-        fetch('/predictOMC', {
+        fetch('/predictMDD', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
