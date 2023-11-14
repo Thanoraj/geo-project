@@ -4,9 +4,7 @@ from flask_cors import CORS
 import joblib
 import pandas as pd
 
-from tensorflow.keras.models import load_model
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
 
 import math
 
