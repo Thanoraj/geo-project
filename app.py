@@ -61,8 +61,8 @@ def predictMDD1():
     if request.method == 'POST':
         data1 = request.get_json(force=True)
         print(data1)
-        predictionMDD = predictMDD(data1)
-        return jsonify({"predicted": str(predictionMDD)})
+        # predictionMDD = predictMDD(data1)
+        # return jsonify({"predicted": str(predictionMDD)})
         data = pd.read_excel("data/MDD.xlsx")
 
         fasoil_value = float(data1['fasoil'])
@@ -119,8 +119,8 @@ def predictOMC1():
     if request.method == 'POST':
         data1 = request.get_json(force=True)
         print(data1)
-        predictionMDD = predictOMC(data1)
-        return jsonify({"predicted": str(predictionMDD)})
+        # predictionMDD = predictOMC(data1)
+        # return jsonify({"predicted": str(predictionMDD)})
         data = pd.read_excel("data/omc.xlsx")
 
         fasoil_value = float(data1['fasoil'])
