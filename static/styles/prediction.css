@@ -133,7 +133,7 @@ ul {
 }
 
 .form-row label {
-    flex: 0 0 40%; /* Adjust the width of the label as needed */
+    /* flex: 0 0 40%; */
     text-align: left; /* Align the text of the label to the left */
 }
 

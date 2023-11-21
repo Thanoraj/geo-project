@@ -7,6 +7,8 @@ import pandas as pd
 import numpy as np
 
 import math
+from tensorflow.keras.models import load_model
+
 
 
 app = Flask(__name__)
@@ -15,27 +17,29 @@ CORS(app)
 
 
 def predictMDD (data):
-    input_data = np.array([[float(data['fasoil']), float(data['pi']), float(data['mddr'])]])
+    input_data = np.array([[float(data['fasoil']), float(data['pi']), float(data['mddr']),float(data['fasoil'])**2, np.sqrt(float(data['fasoil']))]])
     scaler_X = joblib.load('data/model1/scaler_X.pkl')
     # scaler_y = joblib.load('data/model1/scaler_y.pkl')
-    input_data = scaler_X.fit_transform(input_data)
+    input_data = scaler_X.transform(input_data)
     model1 = load_model('data/model1/model_1.h5')
     prediction = model1.predict(input_data)
-    prediction = np.array(prediction).reshape(-1, 1)
+    # prediction = np.array(prediction).reshape(-1, 1)
     # scaled_prediction = scaler_y.inverse_transform(prediction)
+    print(prediction)
     return prediction[0][0]
 
 
 def predictOMC (data):
-    input_data = np.array([[float(data['fasoil']), float(data['pi']), float(data['mddr'])]])
+    input_data = np.array([[float(data['fasoil']), float(data['pi']), float(data['mddr']),float(data['fasoil'])**2, np.sqrt(float(data['fasoil']))]])
     scaler_X = joblib.load('data/model2/scaler_X.pkl')
-    scaler_y = joblib.load('data/model2/scaler_y.pkl')
-    input_data = scaler_X.fit_transform(input_data)
+    # scaler_y = joblib.load('data/model2/scaler_y.pkl')
+    input_data = scaler_X.transform(input_data)
+    print(input_data)
     model1 = load_model('data/model2/model_2.h5')
     prediction = model1.predict(input_data)
-    prediction = np.array(prediction).reshape(-1, 1)
-    scaled_prediction = scaler_y.inverse_transform(prediction)
-    return scaled_prediction[0][0]
+    print(prediction)
+    # scaled_prediction = scaler_y.inverse_transform(prediction)
+    return prediction[0][0]
 
 def predictUCS (data):
     input_data = np.array([[float(data['fasoil']), float(data['pi']), float(data['mddr'])]])
@@ -57,7 +61,8 @@ def predictMDD1():
     if request.method == 'POST':
         data1 = request.get_json(force=True)
         print(data1)
-        # predictionMDD = predictOMC(data)
+        predictionMDD = predictMDD(data1)
+        return jsonify({"predicted": str(predictionMDD)})
         data = pd.read_excel("data/MDD.xlsx")
 
         fasoil_value = float(data1['fasoil'])
@@ -82,13 +87,18 @@ def predictMDD1():
                     fourth_column_value = rows.iloc[0, 3]
                     matched = 4
         if matched != 4:
+                print(matched)
                 lower = rows[rows.iloc[:, matched] < target].iloc[:, matched].max()
                 higher = rows[rows.iloc[:, matched] > target].iloc[:, matched].min()
 
-                # Get the corresponding rows
-                lower_row = rows[np.round(rows.iloc[:, matched],3) == lower]
-                higher_row = rows[np.round(rows.iloc[:, matched],3) == higher]
+                print(lower)
+                print(higher)
 
+                # Get the corresponding rows
+                lower_row = rows[rows.iloc[:, matched] == lower]
+                higher_row = rows[rows.iloc[:, matched] == higher]
+                print(lower_row)
+                print(higher_row)
                 if not lower_row.empty and not higher_row.empty:
                     lower_value = lower_row.iloc[0, 3]
                     higher_value = higher_row.iloc[0, 3]
@@ -109,7 +119,8 @@ def predictOMC1():
     if request.method == 'POST':
         data1 = request.get_json(force=True)
         print(data1)
-        # predictionMDD = (data)
+        predictionMDD = predictOMC(data1)
+        return jsonify({"predicted": str(predictionMDD)})
         data = pd.read_excel("data/omc.xlsx")
 
         fasoil_value = float(data1['fasoil'])
@@ -134,12 +145,16 @@ def predictOMC1():
                     fourth_column_value = rows.iloc[0, 3]
                     matched = 4
         if matched != 4:
+                
+                
                 lower = rows[rows.iloc[:, matched] < target].iloc[:, matched].max()
                 higher = rows[rows.iloc[:, matched] > target].iloc[:, matched].min()
 
                 # Get the corresponding rows
-                lower_row = rows[np.round(rows.iloc[:, matched],3) == lower]
-                higher_row = rows[np.round(rows.iloc[:, matched],3) == higher]
+                lower_row = rows[rows.iloc[:, matched] == lower]
+                higher_row = rows[rows.iloc[:, matched] == higher]
+                print(lower_row)
+                print(higher_row)
 
                 if not lower_row.empty and not higher_row.empty:
                     lower_value = lower_row.iloc[0, 3]
@@ -181,7 +196,7 @@ def predictUCS1():
                 rows = rows[np.round(rows.iloc[:, 2],3) == third_col_value]
                 matched = 1
                 target = second_col_value
-                if len(rows) > 1 and not rows[np.round(rows.iloc[:, 1],3) == second_col_value]:
+                if len(rows) > 1 and not rows[np.round(rows.iloc[:, 1],3) == second_col_value].empty:
                     rows = rows[np.round(rows.iloc[:, 1],3) == second_col_value]
                     fourth_column_value = rows.iloc[0, 3]
                     matched = 4

@@ -23,17 +23,17 @@
             <form class="input-form">
                 <div class="input-title">Enter the inputs</div>
                 <div class="form-row">
-                    <label for="clay">FA/SOIL:</label>
+                    <label for="clay">FA/SOIL (0.00 to 4.00) :</label>
                     <input type="number" id="clay" name="clay" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="pi">PI:</label>
+                    <label for="pi">I<sub>p</sub> % (25 to 60) :</label>
                     <input type="number" id="pi" name="pi" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="mddr">MDD<sub>n</sub>:</label>
+                    <label for="mddr">MDD<sub>n</sub> (kNm<sup>-3</sup>) (13.75 to 17.48) :</label>
                     <input type="number" id="mddr" name="mddr" required>
                 </div>
 
@@ -69,11 +69,11 @@
                 <p>Performance of the developed Model: R-Square: 0.994 | RMSE: 0.091</p>
                 <p>For best performance, input the following parameters within the specified ranges:</p>
                 <ul>
-                    <li>Soil Percentage: 20% to 100%</li>
-                    <li>Plasticity Index (PI) of raw soil 25% to 50%</li>
-                    <li>Fly Ash Percentage: 0% to 80%</li>
-                    <li>Calcium Oxide (CaO) Percentage: 0.5% to 24.1%</li>
-                    <li>MDD of raw soil (MDDR): 13.75 kNm<sup>3</sup> to 17.48 kNm<sup>3</sup></li>
+                    <li>FA/Soil: 0.00 to 4.00</li>
+                    <li>Plasticity Index (PI) of raw soil 25% to 60%</li>
+                    <li>MDD of raw soil (MDDn): 13.75 kNm-3
+                        to 17.48 kNm-3</li>
+                    
                 </ul>
             </div>
             <div></div>
@@ -101,7 +101,7 @@
             mddr:mddr,
         }); // Convert to a JSON string
 
-        fetch('/predictOMC', {
+        fetch('/predictMDD', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

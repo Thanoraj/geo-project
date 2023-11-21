@@ -55,7 +55,7 @@ def plot_results(actual_values, predicted_values, file_name):
 
 def trainMDD():
     # Initialize random seeds
-    SEED_VALUE = 20
+    SEED_VALUE = 96
     tf.random.set_seed(SEED_VALUE)
     np.random.seed(SEED_VALUE)
     random.seed(SEED_VALUE)
@@ -64,22 +64,24 @@ def trainMDD():
 
     scaler_X = MinMaxScaler()
 
-    scaler_Y = MinMaxScaler()
+    # scaler_Y = MinMaxScaler()
 
     data = pd.read_excel("data/MDD.xlsx")
+    data['FA/Soil_squared'] = data['FA/Soil'] ** 2
+    data['FA/Soil_sqrt'] = np.sqrt(data['FA/Soil'])
 
     X = data.drop(['MDD'], axis=1)
-    y = np.array(data['MDD']).reshape(-1, 1)
+    # y = np.array(data['MDD']).reshape(-1, 1)
 
     X_scaled = scaler_X.fit_transform(X)
-    y_scaled = scaler_Y.fit_transform(y)
+    # y_scaled = scaler_Y.fit_transform(y)
 
     joblib.dump(scaler_X, 'data/model1/scaler_X.pkl')
 
     # Save the target variable scaler, if you have one
-    joblib.dump(scaler_Y, 'data/model1/scaler_y.pkl')
+    # joblib.dump(scaler_Y, 'data/model1/scaler_y.pkl')
 
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_scaled, test_size=0.1, random_state=SEED_VALUE)
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, data['MDD'], test_size=0.1, random_state=SEED_VALUE)
 
     # Regularization parameter
     L2_REGULARIZATION = 0.001
@@ -100,11 +102,11 @@ def trainMDD():
                                'Value': [rmse, r2]}).round(3)
     
     # Plotting results
-    plot_results(scaler_Y.inverse_transform(y_test).flatten(), scaler_Y.inverse_transform(y_pred).flatten(), 'plot1.jpeg')
+    plot_results(y_test, y_pred, 'plot1.jpeg')
 
 def trainOMC():
     # Initialize random seeds
-    SEED_VALUE = 19
+    SEED_VALUE = 22
     tf.random.set_seed(SEED_VALUE)
     np.random.seed(SEED_VALUE)
     random.seed(SEED_VALUE)
@@ -112,23 +114,25 @@ def trainOMC():
     # Load and preprocess data
 
     scaler_X = MinMaxScaler()
-    scaler_Y = MinMaxScaler()
+    # scaler_Y = MinMaxScaler()
 
     data = pd.read_excel("data/omc.xlsx")
+    data['FA/Soil_squared'] = data['FA/Soil'] ** 2
+    data['FA/Soil_sqrt'] = np.sqrt(data['FA/Soil'])
 
     X = data.drop(['OMC'], axis=1)
-    y = np.array(data['OMC']).reshape(-1, 1)
+    # y = np.array(data['OMC']).reshape(-1, 1)
 
     X_scaled = scaler_X.fit_transform(X)
-    y_scaled = scaler_Y.fit_transform(y)
+    # y_scaled = scaler_Y.fit_transform(y)
 
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_scaled, test_size=0.1, random_state=SEED_VALUE)
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, data['OMC'], test_size=0.1, random_state=SEED_VALUE)
 
     # Save the feature scaler
     joblib.dump(scaler_X, 'data/model2/scaler_X.pkl')
 
     # Save the target variable scaler, if you have one
-    joblib.dump(scaler_Y, 'data/model2/scaler_y.pkl')
+    # joblib.dump(scaler_Y, 'data/model2/scaler_y.pkl')
 
 
     # Regularization parameter
@@ -152,7 +156,7 @@ def trainOMC():
                                'Value': [rmse, r2]}).round(3)
     
     # Plotting results
-    plot_results(scaler_Y.inverse_transform(y_test).flatten(), scaler_Y.inverse_transform(y_pred).flatten(), 'plot2.jpeg')
+    plot_results(y_test, y_pred, 'plot2.jpeg')
 
 
 def trainUCS():
@@ -165,23 +169,23 @@ def trainUCS():
     # Load and preprocess data
 
     scaler_X = MinMaxScaler()
-    scaler_Y = MinMaxScaler()
+    # scaler_Y = MinMaxScaler()
 
     data = pd.read_excel("data/Model UCS.xlsx")
 
     X = data.drop(['UCS(kPa)'], axis=1)
-    y = np.array(data['UCS(kPa)']).reshape(-1, 1)
+    # y = np.array(data['UCS(kPa)']).reshape(-1, 1)
 
     X_scaled = scaler_X.fit_transform(X)
-    y_scaled = scaler_Y.fit_transform(y)
+    # y_scaled = scaler_Y.fit_transform(y)
 
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_scaled, test_size=0.1, random_state=SEED_VALUE)
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, data['UCS(kPa)'], test_size=0.1, random_state=SEED_VALUE)
 
     # Save the feature scaler
     joblib.dump(scaler_X, 'data/model3/scaler_X.pkl')
 
     # Save the target variable scaler, if you have one
-    joblib.dump(scaler_Y, 'data/model3/scaler_y.pkl')
+    # joblib.dump(scaler_Y, 'data/model3/scaler_y.pkl')
 
 
     # Regularization parameter
@@ -205,10 +209,10 @@ def trainUCS():
                                'Value': [rmse, r2]}).round(3)
     
     # Plotting results
-    plot_results(scaler_Y.inverse_transform(y_test).flatten(), scaler_Y.inverse_transform(y_pred).flatten(), 'plot3.jpeg')
+    plot_results(y_test, y_pred, 'plot3.jpeg')
 
 
 # Run the function
 trainMDD()
 trainOMC()
-trainUCS()
+# trainUCS()

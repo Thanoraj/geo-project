@@ -24,17 +24,17 @@
             <form class="input-form">
                 <div class="input-title">Enter the inputs</div>
                 <div class="form-row">
-                    <label for="clay">FA/SOIL:</label>
+                    <label for="clay">FA/SOIL (0.00 to 1.50) :</label>
                     <input type="number" id="clay" name="clay" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="pi">PI:</label>
+                    <label for="pi">I<sub>p</sub> % (25 to 50) :</label>
                     <input type="number" id="pi" name="pi" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="mddr">OMC<sub>n</sub>:</label>
+                    <label for="mddr">OMC<sub>n</sub> % (12.30 to 29.00) :</label>
                     <input type="number" id="mddr" name="mddr" required>
                 </div>
 
@@ -70,12 +70,10 @@
                 <p>Performance of the developed Model: R-Square: 0.994 | RMSE: 0.091</p>
                 <p>For best performance, input the following parameters within the specified ranges:</p>
                 <ul>
-                    <li>Soil Percentage: 20% to 100%</li>
+                    <li>FA/Soil: 0.00 to 1.50</li>
                     <li>Plasticity Index (PI) of raw soil 25% to 50%</li>
-                    <li>Fly Ash Percentage: 0% to 80%</li>
-                    <li>Calcium Oxide (CaO) Percentage: 0.5% to 24.1%</li>
-                    <li>OMC of raw soil (OMCn): 13.75% to 17.48%</li>
-                </ul>
+                    <li>OMC of raw soil (OMCn): 12.30% to 29.00%</li>
+                    </ul>
             </div>
             <div></div>
             <a href="/" class="main-menu-button">MAIN MENU</a>
@@ -102,7 +100,7 @@
             mddr:mddr,
         }); // Convert to a JSON string
 
-        fetch('/predictMDD', {
+        fetch('/predictOMC', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
