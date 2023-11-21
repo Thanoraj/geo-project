@@ -124,13 +124,13 @@ def predictOMC1():
     if request.method == 'POST':
         data1 = request.get_json(force=True)
         print(data1)
-        fasoil_value = float(data1['fasoil'])
-        third_col_value = float(data1['mddr'])
-        if fasoil_value == 0:
-            predictionMDD = third_col_value
-        else :    
-            predictionMDD = predictOMC(data1)
-        return jsonify({"predicted": str(predictionMDD)})
+        # fasoil_value = float(data1['fasoil'])
+        # third_col_value = float(data1['mddr'])
+        # if fasoil_value == 0:
+        #     predictionMDD = third_col_value
+        # else :    
+        #     predictionMDD = predictOMC(data1)
+        # return jsonify({"predicted": str(predictionMDD)})
         data = pd.read_excel("data/omc.xlsx")
 
         fasoil_value = float(data1['fasoil'])
